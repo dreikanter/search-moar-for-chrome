@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+
+      function matchUrl(tabId, changeInfo, tab) {
+        if (tab.url.match(/^http:\/\/(images\.?)yandex\.ru\/yandsearch\?text=([^&]*)/)) {
+
+          chrome.pageAction.show(tabId);
+          chrome.pageAction.setTitle({title: "[" + RegExp.$1 + "] " + RegExp.$2, tabId: tabId});
+
+        // } else if (tab.url.match(/^http:\/\/((www\.|images\.)?)yandex\.ru\/yandsearch?text=([^&]*)/)) {
+          
+        //   chrome.pageAction.show(tabId);
+        //   chrome.pageAction.setTitle({title: RegExp.$1, tabId: tabId});
+
+        // } else if(tab.url.match(/^http"\/\/((www.|images.)?)google\.(com|ru)\/search\?q=([^&]*)/)) {
+
+        //   chrome.pageAction.show(tabId);
+        //   chrome.pageAction.setTitle({title: RegExp.$1, tabId: tabId});
+
+        } else {
+          
+          chrome.pageAction.hide(tabId);
+
+        }
+      };
+
+      chrome.tabs.onUpdated.addListener(matchUrl);
+
+    </script>
+  </head>
+</html>
