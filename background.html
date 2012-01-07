@@ -5,13 +5,19 @@
 
       function matchUrl(tabId, changeInfo, tab)
       {
-        if(urlIsMatching(tab.url))
+        switch(urlIsMatching(tab.url))
         {
-          showPageActionIcon(tabId, "Search moar!");
-        }
-        else
-        {
-          hidePageActionIcon(tabId);
+          case "g":
+            showPageActionIcon(tabId, "y", "Search moar!");
+            break;
+
+          case "y":
+            showPageActionIcon(tabId, "g", "Search moar!");
+            break;
+
+          default:
+            hidePageActionIcon(tabId);
+            break;
         }
       }
 
@@ -19,18 +25,15 @@
       {
         if(url.match(/^http:\/\/(www\.|images\.)?google\.(com|ru)\/(search|webhp)\?(.*)$/))
         {
-          console.log("Google SERP detected: " + url);
-          return (RegExp.$1 == "images.") || isSerpUrl(RegExp.$4);
+          return ((RegExp.$1 == "images.") || isSerpUrl(RegExp.$4)) ? "g" : "";
         }
         else if (url.match(/^http:\/\/(www\.|images\.)?yandex\.ru\/yandsearch\?text=/))
         {
-          console.log("Yandex SERP detected: " + url);
-          return true;
+          return "y";
         }
         else
         {
-          console.log("SERP not detected: " + url);
-          return false;
+          return "";
         }
       }
 
@@ -62,10 +65,25 @@
         return "";
       }
 
-      function showPageActionIcon(tabId, title)
+      function showPageActionIcon(tabId, iconId, title)
       {
         chrome.pageAction.show(tabId);
+        console.log("getIconPath()" + getIconPath(iconId));
+        chrome.pageAction.setIcon({ tabId: tabId, path: getIconPath(iconId)});
         chrome.pageAction.setTitle({ tabId: tabId, title: title });
+      }
+
+      function getIconPath(iconId)
+      {
+        switch(iconId)
+        {
+          case "y":
+            return "icons/icon-" + iconId + "-18.png";
+          case "g":
+            return "icons/icon-" + iconId + "-18.png";
+          default:
+            return "icons/icon-18.png";
+        }
       }
 
       function hidePageActionIcon(tabId)
@@ -73,7 +91,13 @@
         chrome.pageAction.hide(tabId);
       }
 
+      function redirectSearchRequest(tab)
+      {
+        console.log("redirectSearchRequest");
+      }
+
       chrome.tabs.onUpdated.addListener(matchUrl);
+      chrome.pageAction.onClicked.addListener(redirectSearchRequest); 
 
     </script>
   </head>
