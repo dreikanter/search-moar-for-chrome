@@ -3,28 +3,75 @@
   <head>
     <script>
 
-      function matchUrl(tabId, changeInfo, tab) {
-        if (tab.url.match(/^http:\/\/(images\.?)yandex\.ru\/yandsearch\?text=([^&]*)/)) {
-
-          chrome.pageAction.show(tabId);
-          chrome.pageAction.setTitle({title: "[" + RegExp.$1 + "] " + RegExp.$2, tabId: tabId});
-
-        // } else if (tab.url.match(/^http:\/\/((www\.|images\.)?)yandex\.ru\/yandsearch?text=([^&]*)/)) {
-          
-        //   chrome.pageAction.show(tabId);
-        //   chrome.pageAction.setTitle({title: RegExp.$1, tabId: tabId});
-
-        // } else if(tab.url.match(/^http"\/\/((www.|images.)?)google\.(com|ru)\/search\?q=([^&]*)/)) {
-
-        //   chrome.pageAction.show(tabId);
-        //   chrome.pageAction.setTitle({title: RegExp.$1, tabId: tabId});
-
-        } else {
-          
-          chrome.pageAction.hide(tabId);
-
+      function matchUrl(tabId, changeInfo, tab)
+      {
+        if(urlIsMatching(tab.url))
+        {
+          showPageActionIcon(tabId, "Search moar!");
         }
-      };
+        else
+        {
+          hidePageActionIcon(tabId);
+        }
+      }
+
+      function urlIsMatching(url)
+      {
+        if(url.match(/^http:\/\/(www\.|images\.)?google\.(com|ru)\/(search|webhp)\?(.*)$/))
+        {
+          console.log("Google SERP detected: " + url);
+          return (RegExp.$1 == "images.") || isSerpUrl(RegExp.$4);
+        }
+        else if (url.match(/^http:\/\/(www\.|images\.)?yandex\.ru\/yandsearch\?text=/))
+        {
+          console.log("Yandex SERP detected: " + url);
+          return true;
+        }
+        else
+        {
+          console.log("SERP not detected: " + url);
+          return false;
+        }
+      }
+
+      function isSerpUrl(query)
+      {
+        var sharpPos = query.indexOf("#");
+        var params = (sharpPos != -1) ? query.substr(sharpPos + 1) : query;
+        var tabParam = "tbm";
+
+        return !containsGetParameter(params, tabParam) || 
+                extractGetParameter(params, tabParam) == "isch";
+      }
+
+      function containsGetParameter(query, parameterName)
+      {
+        var param = parameterName + "=";
+        return (query.substr(0, param.length) == param) || 
+               (query.indexOf("&" + param) != -1);
+      }
+
+      function extractGetParameter(query, parameterName)
+      {
+        var vars = query.split("&"); 
+        for (var i = 0; i < vars.length; i++)
+        {
+          var pair = vars[i].split("="); 
+          if (pair[0] == parameterName) return pair[1]; 
+        }
+        return "";
+      }
+
+      function showPageActionIcon(tabId, title)
+      {
+        chrome.pageAction.show(tabId);
+        chrome.pageAction.setTitle({ tabId: tabId, title: title });
+      }
+
+      function hidePageActionIcon(tabId)
+      {
+        chrome.pageAction.hide(tabId);
+      }
 
       chrome.tabs.onUpdated.addListener(matchUrl);
 

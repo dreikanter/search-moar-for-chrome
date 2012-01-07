@@ -1,0 +1,18 @@
+URL parsing
+
+Если URL начинается с { http://www.google.(ru|com)/search?,  http://images.google.(ru|com)/search? }, парсим Google SERP URL:
+
+     Если URL содержит «#», Query = всё, что после «#».
+     Иначе Query = всё, что после «/search?».
+     Request = значение параметра «q» в Query.
+
+     Если домен — images.google.(ru|com), это картинки.
+     Иначе проверить наличие в Query параметра «tbm».
+     Если такого параметра нет, это веб.
+     Если параметр есть и равен «isch», это картинки.
+     Иначе, URL не актуален.
+
+Иначе, если URL начинается с { http://yandex.ru/yandsearch?, http://images.yandex.ru/yandsearch? }, парсим Yandex SERP URL:
+
+     Если домен — images.yandex.ru, картинки, иначе — веб.
+     Request = значение параметра «text».
