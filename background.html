@@ -68,7 +68,6 @@
       function showPageActionIcon(tabId, iconId, title)
       {
         chrome.pageAction.show(tabId);
-        console.log("getIconPath()" + getIconPath(iconId));
         chrome.pageAction.setIcon({ tabId: tabId, path: getIconPath(iconId)});
         chrome.pageAction.setTitle({ tabId: tabId, title: title });
       }
