@@ -14,15 +14,15 @@
 
 Поисковый запрос в элементе `<input name="text" />` (в поиске по вебу и картинкам). Извлекается так:
 
-'''javascript
-document.getElementsByName("text")[0].value
-'''
+	'''
+	document.getElementsByName("text")[0].value
+	'''
 
 Или так (jQuery):
 
-'''javascript
-$('input[name=text]')
-'''
+	'''
+	$('input[name=text]')
+	'''
 
 Альтернативный вариант: поисковый запрос — значение GET-параметра `text`.
 
@@ -30,15 +30,15 @@ $('input[name=text]')
 
 Поисковый запрос находится в элементе `input`, у которого `name="q"`. Извлекается так:
 
-'''javascript
-document.getElementsByName("q")[0].value
-'''
+	'''
+	document.getElementsByName("q")[0].value
+	'''
 
 Или так (jQuery):
 
-'''javascript
-$('input[name=q]')
-'''
+	'''
+	$('input[name=q]')
+	'''
 
 Альтернативный вариант (overcomplicated): если URL начинается с { `http://www.google.(ru|com)/search?`,  `http://images.google.(ru|com)/search?` }, парсим Google SERP URL:
 
