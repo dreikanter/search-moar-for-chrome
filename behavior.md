@@ -4,25 +4,25 @@
 
 ### Service detection
 
-`http://[www.]yandex.ru/.*` — веб-поиск
+`http://[www.]yandex.ru/.*` (веб-поиск)
 → `http://www.google.ru/search?q=111`
 
-`http://images.yandex.ru/.*` — картинко-поиск
+`http://images.yandex.ru/.*` (картинко-поиск)
 → `http://www.google.ru/search?q=%request%&tbm=isch`
 
 ### Search request extraction
 
 Поисковый запрос в элементе `<input name="text" />` (в поиске по вебу и картинкам). Извлекается так:
 
-     '''javascript
-     document.getElementsByName("text")[0].value
-     '''
+'''javascript
+document.getElementsByName("text")[0].value
+'''
 
 Или так (jQuery):
 
-     '''javascript
-     $('input[name=text]')
-     '''
+'''javascript
+$('input[name=text]')
+'''
 
 Альтернативный вариант: поисковый запрос — значение GET-параметра `text`.
 
@@ -30,15 +30,15 @@
 
 Поисковый запрос находится в элементе `input`, у которого `name="q"`. Извлекается так:
 
-     '''javascript
-     document.getElementsByName("q")[0].value
-     '''
+'''javascript
+document.getElementsByName("q")[0].value
+'''
 
 Или так (jQuery):
 
-     '''javascript
-     $('input[name=q]')
-     '''
+'''javascript
+$('input[name=q]')
+'''
 
 Альтернативный вариант (overcomplicated): если URL начинается с { `http://www.google.(ru|com)/search?`,  `http://images.google.(ru|com)/search?` }, парсим Google SERP URL:
 
@@ -53,8 +53,8 @@ Request = значение параметра «q» в Query.
 
 #### URL parsing aproach
 
-`http://[www.]google.(ru|com)/search.*` — веб-поиск
+`http://[www.]google.(ru|com)/search.*` (веб-поиск)
 → `http://yandex.ru/yandsearch?text=111`
 
-`http://images.google.(ru|com)/search.*` — картинко-поиск
+`http://images.google.(ru|com)/search.*` (картинко-поиск)
 → `http://images.yandex.ru/yandsearch?text=%request%`
