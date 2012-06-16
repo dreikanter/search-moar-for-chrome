@@ -1,0 +1,46 @@
+Test data for regexp debugging
+
+Google web search:
+
+https://www.google.ru/search?q=111&hl=en&newwindow=1&gbv=2&prmd=imvns&source=lnms&sa=X&ei=-5bcT4_fGIWYiAfUvLyzCg&ved=0CBAQ_AUoAA&biw=1183&bih=859
+
+https://www.google.ru/search?sugexp=chrome,mod=19&sourceid=chrome&ie=UTF-8&q=javascript+regexp
+
+https://www.google.com/search?hl=en&gbv=2&q=111&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&biw=1302&bih=946&ie=UTF-8&sa=N&tab=iw&ei=jZrcT46sEKPnmAXenYGtDA
+
+https://www.google.com/search?q=11111212121224242&biw=1302&bih=944&ie=UTF-8&hl=en&sa=N&tab=iw&ei=Gc7cT-2_OMTkmAX-k_iAAw#hl=en&biw=1302&bih=944&sclient=psy-ab&q=111&oq=111&aq=f&aqi=&aql=&gs_l=serp.3...14.4710.1.4918.2.2.0.0.0.0.385.385.3-1.1.0...0.0.-VLPQft4jvM&pbx=1&fp=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&cad=b
+
+https://www.google.ru/search?aq=f&sugexp=chrome,mod=19&sourceid=chrome&ie=UTF-8&q=111.
+
+
+Google image search:
+
+https://www.google.ru/search?sugexp=chrome,mod%3D19&q=javascript+regexp&um=1&ie=UTF-8&hl=en&tbm=isch&source=og&sa=N&tab=wi&ei=-pncT8euBOSSiAeytPCVCg&biw=1183&bih=859&sei=ZZrcT-frKseSiQenutCYCg
+
+https://www.google.com/search?tbm=isch&hl=en&source=hp&biw=1302&bih=946&q=yiquewyruiwyetuiyewiort&gbv=2&oq=yiquewyruiwyetuiyewiort&aq=f&aqi=&aql=&gs_l=img.3...1242.1972.0.2159.23.4.0.12.0.2.438.703.2j1j4-1.4.0...0.0.sgUhQBSsMZI
+
+https://www.google.com/search?tbm=isch&hl=en&source=hp&biw=1302&bih=946&q=yiquewyruiwyetuiyewiort&gbv=2&oq=yiquewyruiwyetuiyewiort&aq=f&aqi=&aql=&gs_l=img.3...1242.1972.0.2159.23.4.0.12.0.2.438.703.2j1j4-1.4.0...0.0.sgUhQBSsMZI#hl=en&gbv=2&tbm=isch&sa=1&q=111&oq=111&aq=f&aqi=g10&aql=&gs_l=img.3..0l10.7467.7869.0.8017.3.3.0.0.0.0.371.371.3-1.1.0...0.0.8ncsCo1MaIk&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&fp=9c6f01a34f18106e&biw=1302&bih=946
+
+http://www.google.ru/imgres?hl=en&newwindow=1&biw=1183&bih=859&tbm=isch&tbnid=dppmB8z_aZ-0_M:&imgrefurl=http://en.wikipedia.org/wiki/File:Virginia_123.svg&docid=zkjoJRMwqBmcRM&imgurl=http://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Virginia_123.svg/480px-Virginia_123.svg.png&w=480&h=384&ei=IJvcT5eHCILYigfV4LzBCg&zoom=1
+
+https://www.google.ru/search?q=123&biw=1183&bih=859&sei=H5vcT-LFHKTYige1p_iDCg&tbm=isch
+
+https://www.google.com/search?hl=en&biw=1302&bih=944&q=111&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.,cf.osb&um=1&ie=UTF-8&tbm=isch&source=og&sa=N&tab=wi&ei=2c7cT5iFAa7NmAW77rm5DA
+
+
+Yandex web search:
+
+http://yandex.ru/yandsearch?clid=1806159&text=111&lr=2
+
+http://yandex.ru/yandsearch?text=javascript+regexp&clid=1806159&lr=2
+
+http://yandex.ru/yandsearch?text=123&clid=1806159&lr=2
+
+
+Yandex images search:
+
+http://images.yandex.ru/yandsearch?text=123
+
+http://images.yandex.ru/yandsearch?text=123&img_url=cs10573.vkontakte.ru%2Fu20515573%2F-14%2Fx_86cdead9.jpg&pos=6&rpt=simage
+
+http://images.yandex.ru/yandsearch?text=123&img_url=enemihai123.files.wordpress.com%2F2010%2F05%2F118056768896_cs_office0002-_11812914962.jpg&pos=7&rpt=simage
