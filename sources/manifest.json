@@ -2,7 +2,7 @@
 	"name": "Search Moar!",
 	"version": "1.0",
 	"description": "Switch between Yandex and Google SERP with a single click.",
-	"background": { "scripts": ["background.js"] },
+	"background": { "scripts": ["jquery.min.js", "background.js"] },
 	"page_action": {
 		"default_title": "Search moar!",
 		"default_icon" : "icons/icon-18.png"

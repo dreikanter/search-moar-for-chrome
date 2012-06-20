@@ -47,22 +47,13 @@ function hidePageActionIcon(tabId)
 
 function redirectSearchRequest(tab)
 {
-  engine = (getSearchEngineType(url) == "g") ? "y" : "g";
+  currentEngine = getSearchEngineType(url);
+  engine = (currentEngine == "g") ? "y" : "g";
   service = getSearchService(url);
-  request = getSearchRequest(url);
+  request = getSearchRequest(currentEngine);
 
   navigateTo(getSerpUrl(engine, service, request));
 }
-
-// function getParameterByName(url, name)
-// {
-//   name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-//   var results = new RegExp("[\\?&]" + name + "=([^&#]*)").exec(url);
-//   if(results == null)
-//     return "";
-//   else
-//     return decodeURIComponent(results[1].replace(/\+/g, " "));
-// }
 
 function getSearchService(url)
 {
@@ -80,10 +71,19 @@ function getSearchService(url)
   return "";
 }
 
-function getSearchRequest(url)
+function getSearchRequest(searchEngine)
 {
-  // TODO
-  return "http://ya.ru";
+  switch(searchEngine)
+  {
+    case "g":
+      return "";
+
+    case "y":
+      return "";
+
+    default:
+      return "";
+  }
 }
 
 function getSerpUrl(engine, service, request)
