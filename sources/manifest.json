@@ -9,9 +9,10 @@
 	},
 	"permissions": [
 		"tabs",
-		"http://*.google.com/",
-		"http://*.google.ru/",
-		"http://*.yandex.ru/"
+		"http*://*/*",
+		"http*://*.google.com/*",
+		"http*://*.google.ru/*",
+		"http*://*.yandex.ru/*"
 	],
 	"icons": {
 		"16" : "icons/icon-16.png",

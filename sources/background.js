@@ -18,7 +18,7 @@ function matchUrl(tabId, changeInfo, tab)
 
 function getSearchEngineType(url)
 {
-  if(url.match(/^https?\:\/\/(www)?\.google\.\w{2,3}\/(search|imgres)\?/))
+  if(url.match(/^https?:\/\/(www)?\.google\.\w{2,3}\/(search\?|imgres\?|webhp#)/))
   {
     return "g";
   }
@@ -45,24 +45,36 @@ function hidePageActionIcon(tabId)
   chrome.pageAction.hide(tabId);
 }
 
-function redirectSearchRequest(tab)
-{
-  currentEngine = getSearchEngineType(url);
-  engine = (currentEngine == "g") ? "y" : "g";
-  service = getSearchService(url);
-  request = getSearchRequest(currentEngine);
+String.prototype.format = function() {
+    var formatted = this;
+    for(arg in arguments) {
+        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+    }
+    return formatted;
+};
 
-  navigateTo(getSerpUrl(engine, service, request));
+function onPageIconClick(tab)
+{
+  chrome.tabs.executeScript(tab.id, {file: 'querygetter.js'});
+
+  // currentEngine = getSearchEngineType(tab.url);
+  // engine = (currentEngine == "g") ? "y" : "g";
+  // service = getSearchService(tab.url);
+  // request = getSearchRequest(currentEngine);
+  // trueValues = [currentEngine, engine, service, request];
+  // alert(trueValues.join("\n"));
+
+  // navigateTo(getSerpUrl(engine, service, request));
 }
 
 function getSearchService(url)
 {
-  if(url.match(/^https?:\/\/(www)?\.google\.\w{2,3}\/search\?.*tbm=isch/) ||
-     url.match(/^https?:/\/(www\.|images\.)?yandex\.\w{2,3}\/yandsearch\?/))
+  if(url.match(/^https?:\/\/(www)?\.google\.\w{2,3}\/(search|imgres)\?.*tbm=isch/) ||
+     url.match(/^https?:\/\/(www\.|images\.)?yandex\.\w{2,3}\/yandsearch\?/))
   {
     return "images";
   }
-  else if(url.match(/^https?:\/\/(www)?\.google\.\w{2,3}\/search\?/))
+  else if(url.match(/^https?:\/\/(www)?\.google\.\w{2,3}\/(search\?|webhp#)/) ||
           url.match(/^https?:\/\/(www\.)?yandex\.\w{2,3}\/yandsearch\?/))
   {
     return "web";
@@ -76,9 +88,15 @@ function getSearchRequest(searchEngine)
   switch(searchEngine)
   {
     case "g":
+      elements = document.getElementsByName('q');
+      alert(elements[0].value);
+      console.log(elements[0].value);
+
+      //alert($('input[name="q"]').val());
       return "";
 
     case "y":
+      alert($('input[name="text"]').attr('value'));
       return "";
 
     default:
@@ -123,5 +141,11 @@ function navigateTo(url)
   });
 }
 
+// Search requests receiver from content script
+chrome.extension.onRequest.addListener(
+  function(request, sender, sendResponse) {
+    alert(request.serchQuery);
+  });
+
 chrome.tabs.onUpdated.addListener(matchUrl);
-chrome.pageAction.onClicked.addListener(redirectSearchRequest); 
+chrome.pageAction.onClicked.addListener(onPageIconClick);
